@@ -1,0 +1,16 @@
+@startuml
+interface AgfCrudController<I>{
+  org.vendorunlockingpatterns.apigatewayfederator.controller.AgfCrudController<I> 
+  + getDao(): AgfDao<I, E>
+  + getDefaultEntityDtoClass(): <D extends AgfDto> Class<D>
+  + getDefaultEntityListItemDtoClass(): <D extends AgfDto> Class<D>
+  + getEntity(I): <D extends AgfDto> D
+  + getEntity(I, Class<D>): <D extends AgfDto> D
+  + findAllEntities(): <D extends AgfDto> PagedResult<D>
+  + findAllEntities(Class<D>): <D extends AgfDto> PagedResult<D>
+  + createEntity(AgfDto): AgfIdentifiableDto<I>
+  + updateEntity(AgfUpdateDto<I>): void
+  + deleteEntity(I): void
+}
+
+@enduml

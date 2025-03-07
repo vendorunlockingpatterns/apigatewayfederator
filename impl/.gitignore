@@ -1,0 +1,10 @@
+/.apt_generated/
+/.apt_generated_tests/
+/target/
+/.project
+/.settings
+/.classpath
+/.factorypath
+.dirty
+/.tern-project
+/.vscode/

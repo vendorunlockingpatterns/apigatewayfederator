@@ -1,0 +1,129 @@
+@startuml
+interface Api {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + getId(): String
+  + getName(): String
+  + getVersion(): String
+  + getSubscriptionStatus(): ApiSubscriptionStatus
+  + getAccessStatus(): ApiAccessStatus
+  + getThrottlingTiers(): String[]
+}
+enum ApiAccessStatus {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + ENABLED: ApiAccessStatus
+  + ENABLED_TEMP: ApiAccessStatus
+  + DISABLED_PERM: ApiAccessStatus
+  + DISABLED_TEMP: ApiAccessStatus
+  + UNKNOWN: ApiAccessStatus
+ 
+  + values(): ApiAccessStatus[]
+  + valueOf(String): ApiAccessStatus
+  - ApiAccessStatus(): 
+}
+enum ApiSubscriptionStatus {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + ENABLED: ApiSubscriptionStatus
+  + ENABLED_TEMP: ApiSubscriptionStatus
+  + DISABLED_PERM: ApiSubscriptionStatus
+  + DISABLED_TEMP: ApiSubscriptionStatus
+  + UNKNOWN: ApiSubscriptionStatus
+ 
+  + values(): ApiSubscriptionStatus[]
+  + valueOf(String): ApiSubscriptionStatus
+  - ApiSubscriptionStatus(): 
+  + isSubscriptionAllowed(): boolean
+}
+interface CreateApplicationRequest {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + getApplicationName(): String
+}
+interface CreateCredentialRequest {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + getApplicationId(): String
+  + getApplicationName(): String
+  + getGrantTypes(): List<String>
+  + getScopes(): List<String>
+  + getTokenDuration(): Integer
+}
+interface CreateSubscriptionRequest {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + getApplicationId(): String
+  + getApplicationName(): String
+  + getApiId(): String
+  + getThrottlingTier(): String
+}
+interface CredentialInfo {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + getClientId(): String
+  + getClientSecret(): String
+  + getGrantTypes(): List<String>
+  + getScopes(): List<String>
+  + getTokenDuration(): Integer
+}
+interface DeleteApplicationRequest {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + getApplicationId(): String
+}
+interface DeleteSubscriptionRequest {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + getApplicationId(): String
+  + getApiId(): String
+}
+interface FindCredentialRequest {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + getApplicationId(): String
+  + getClientId(): String
+}
+interface GatewayClient {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + init(String): void
+  + findAllApis(): List<Api>
+  + createApplication(CreateApplicationRequest): String
+  + createCredential(CreateCredentialRequest): CredentialInfo
+  + findCredential(FindCredentialRequest): CredentialInfo
+  + regenerateClientSecret(RegenerateClientSecretRequest): CredentialInfo
+  + replicateCredential(ReplicateCredentialRequest): void
+  + deleteApplication(DeleteApplicationRequest): void
+  + createSubscription(CreateSubscriptionRequest): void
+  + deleteSubscription(DeleteSubscriptionRequest): void
+  + updateSubscription(UpdateSubscriptionRequest): void
+  + validate(): void
+}
+interface RegenerateClientSecretRequest {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + getApplicationId(): String
+  + getCredential(): CredentialInfo
+}
+interface ReplicateCredentialRequest {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + getApplicationId(): String
+  + getApplicationName(): String
+  + getCredential(): CredentialInfo
+}
+interface TokenRequestFactory {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + newTokenRequest(HttpTransport): TokenRequest
+}
+interface UpdateSubscriptionRequest {
+  org.vendorunlockingpatterns.apigatewayfederator.gateway
+ 
+  + getApplicationId(): String
+  + getApiId(): String
+  + isSubscriptionEnabled(): boolean
+}
+
+@enduml

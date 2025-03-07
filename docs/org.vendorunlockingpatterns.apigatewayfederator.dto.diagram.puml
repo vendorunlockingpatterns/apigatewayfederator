@@ -1,0 +1,33 @@
+@startuml
+interface AgfDto {
+  org.vendorunlockingpatterns.apigatewayfederator.dto
+ 
+}
+interface AgfIdentifiableDto<I>{
+  org.vendorunlockingpatterns.apigatewayfederator.dto.AgfIdentifiableDto<I> 
+}
+interface AgfUpdateDto<I>{
+  org.vendorunlockingpatterns.apigatewayfederator.dto.AgfUpdateDto<I> 
+  + setUpdatedEntityId(I): void
+}
+enum CredentialApiAcessStatus {
+  org.vendorunlockingpatterns.apigatewayfederator.dto
+ 
+  + GRANTED: CredentialApiAcessStatus
+  + SUSPENDED: CredentialApiAcessStatus
+ 
+  + values(): CredentialApiAcessStatus[]
+  + valueOf(String): CredentialApiAcessStatus
+  - CredentialApiAcessStatus(): 
+}
+interface DtoMapper {
+  org.vendorunlockingpatterns.apigatewayfederator.dto
+ 
+  + init(): void
+  + toDto(E, Class<D>): <D extends AgfDto, E extends AgfEntity<?>> D
+  + toEntity(D, Class<E>): <D extends AgfDto, E extends AgfEntity<?>> E
+  + toEntityMapFunction(Class<E>): <D extends AgfDto, E extends AgfEntity<?>> Function<D, E>
+  + toDtoMapFunction(Class<D>): <D extends AgfDto, E extends AgfEntity<?>> Function<E, D>
+}
+
+@enduml

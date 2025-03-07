@@ -1,0 +1,17 @@
+@startuml
+interface AgfDao<I>{
+  org.vendorunlockingpatterns.apigatewayfederator.dao.AgfDao<I> 
+  + getEntityClass(): Class<E>
+  + persist(E): E
+  + persistIfNotExists(E): boolean
+  + merge(E): E
+  + remove(E): void
+  + removeById(I): void
+  + getEntity(I): E
+  + find(I): E
+  + find(): PagedResult<E>
+  + unpagedFind(): List<E>
+  + update(Identifiable<I>): E
+}
+
+@enduml

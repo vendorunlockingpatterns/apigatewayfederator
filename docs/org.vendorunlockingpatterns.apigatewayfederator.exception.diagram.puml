@@ -1,0 +1,117 @@
+@startuml
+class AgfException {
+  org.vendorunlockingpatterns.apigatewayfederator.exception
+ 
+  - serialVersionUID: long
+  - HTTP_RESPONSE_CONTENT_TYPE: String
+  - errorCode: ErrorCodeType
+  - externalMessage: String
+ 
+  + AgfException(ErrorCodeType, String): 
+  + AgfException(ErrorCodeType, String, String): 
+  + AgfException(ErrorCodeType, Throwable): 
+  + AgfException(ErrorCodeType, String, Throwable): 
+  + AgfException(ErrorCodeType, String, String, Throwable): 
+  + addContextValue(String, Object): AgfException
+  + getMessage(): String
+  + getErrorCode(): ErrorCodeType
+  + getExternalMessage(): String
+  + getHttpResponseContentType(): String
+  + toHttpResponse(): Response
+  + addContextValue(String, Object): ContextedRuntimeException
+  + addContextValue(String, Object): ExceptionContext
+}
+class AgfExceptionBuilder {
+  org.vendorunlockingpatterns.apigatewayfederator.exception
+ 
+  - errorCode: ErrorCodeType
+  - message: String
+  - externalMessage: String
+ 
+  + AgfExceptionBuilder(ErrorCodeType, String): 
+  + AgfExceptionBuilder(ErrorCodeType, String, String): 
+  + newException(): AgfException
+  + newException(Throwable): AgfException
+  + newExceptionWithMsgArgs(..): AgfException
+  + newExceptionWithMsgArgs(Throwable, ..): AgfException
+  + buildsInstancesOf(AgfException): boolean
+  + getErrorCode(): ErrorCodeType
+}
+class ErrorCode {
+  org.vendorunlockingpatterns.apigatewayfederator.exception
+ 
+  + PREFIX: String
+  # code: String
+ 
+  + getCode(): String
+  + hashCode(): int
+  + equals(Object): boolean
+  + compareTo(ErrorCodeType): int
+  + toString(): String
+  + compareTo(Object): int
+}
+class ErrorCodeRegistry {
+  org.vendorunlockingpatterns.apigatewayfederator.exception
+ 
+  + DUPLICATED_ERROR_CODE_MSG: String
+  - REGISTRY: Map<String, ErrorCodeType>
+ 
+  + registerErrorCode(ErrorCodeType): void
+  + getErrorCodes(): List<ErrorCodeType>
+  + getErrorCode(String): ErrorCodeType
+  - register(String, ErrorCodeType, ErrorCodeType): ErrorCodeType
+  - ErrorCodeRegistry(): 
+}
+interface ErrorCodeType {
+  org.vendorunlockingpatterns.apigatewayfederator.exception
+ 
+  + getCode(): String
+}
+interface ErrorCodifiable {
+  org.vendorunlockingpatterns.apigatewayfederator.exception
+ 
+  + getErrorCode(): ErrorCodeType
+  + getExternalMessage(): String
+}
+interface ExceptionContainer {
+  org.vendorunlockingpatterns.apigatewayfederator.exception
+ 
+  + getErrorGroup(): String
+  + init(): void
+}
+interface HttpResponseConvertible {
+  org.vendorunlockingpatterns.apigatewayfederator.exception
+ 
+  + toHttpResponse(): Response
+  + getHttpResponseContentType(): String
+}
+abstract SingletonBeanExceptionContainer {
+  org.vendorunlockingpatterns.apigatewayfederator.exception
+ 
+  # logger: AgfLogger
+ 
+  + SingletonBeanExceptionContainer(): 
+  + init(): void
+}
+class SystemExceptions {
+  org.vendorunlockingpatterns.apigatewayfederator.exception
+ 
+  - SYS_ERROR_EXTERNAL_MSG: String
+  + ERROR_GROUP: String
+  + NOT_IMPLEMENTED: AgfExceptionBuilder
+  + ERROR_CODE_NOT_FOUND: AgfExceptionBuilder
+  + TX_BEGIN_ERROR: AgfExceptionBuilder
+  + TX_COMMIT_ERROR: AgfExceptionBuilder
+  + TX_ROLLBACK_ERROR: AgfExceptionBuilder
+  + GATEWAY_CLIENT_BUILD_ERROR: AgfExceptionBuilder
+  + CREDENTIAL_NOT_FOUND_IN_GATEWAY: AgfExceptionBuilder
+  + METHOD_PRE_CONDITION_FAILED: AgfExceptionBuilder
+  + NOT_SUPPORTED: AgfExceptionBuilder
+  + INTERNAL_ERROR: AgfExceptionBuilder
+ 
+  + SystemExceptions(): 
+  + getErrorGroup(): String
+  + onPostConstruct(): void
+}
+
+@enduml

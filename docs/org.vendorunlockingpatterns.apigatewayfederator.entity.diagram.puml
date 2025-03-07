@@ -1,0 +1,99 @@
+@startuml
+interface AgfEntity<I>{
+  org.vendorunlockingpatterns.apigatewayfederator.entity.AgfEntity<I> 
+}
+interface ApiEntity {
+  org.vendorunlockingpatterns.apigatewayfederator.entity
+ 
+  + getId(): String
+  + setId(String): void
+  + getExternalId(): String
+  + setExternalId(String): void
+  + getName(): String
+  + setName(String): void
+  + getVersion(): String
+  + setVersion(String): void
+  + getSubscriptionStatus(): ApiSubscriptionStatus
+  + setSubscriptionStatus(ApiSubscriptionStatus): void
+  + getAccessStatus(): ApiAccessStatus
+  + setAccessStatus(ApiAccessStatus): void
+  + getThrottlingTiers(): String[]
+  + setThrottlingTiers(String[]): void
+  + getDiscoveredAt(): Date
+  + setDiscoveredAt(Date): void
+  + getSynchronizedAt(): Date
+  + setSynchronizedAt(Date): void
+  + getUpdatedAt(): Date
+  + setUpdatedAt(Date): void
+  + getGateway(): GatewayEntity
+  + setGateway(GatewayEntity): void
+  + hashCode(): int
+  + equals(Object): boolean
+  + getId(): Serializable
+}
+interface GatewayAdminEntity {
+  org.vendorunlockingpatterns.apigatewayfederator.entity
+ 
+  + getId(): Long
+  + setId(Long): void
+  + getCpf(): String
+  + setCpf(String): void
+  + getName(): String
+  + setName(String): void
+  + getEmail(): String
+  + setEmail(String): void
+  + getGateways(): Set<GatewayEntity>
+  + setGateways(Set<GatewayEntity>): void
+  + getId(): Serializable
+}
+interface GatewayEntity {
+  org.vendorunlockingpatterns.apigatewayfederator.entity
+ 
+  + getId(): String
+  + setId(String): void
+  + getName(): String
+  + setName(String): void
+  + getVendor(): String
+  + setVendor(String): void
+  + getVersion(): String
+  + setVersion(String): void
+  + getAdmins(): Set<GatewayAdminEntity>
+  + setAdmins(Set<GatewayAdminEntity>): void
+  + getGatewayClientClass(): String
+  + setGatewayClientClass(String): void
+  + getGatewayClientConfig(): String
+  + setGatewayClientConfig(String): void
+  + isKeyManager(): boolean
+  + setKeyManager(boolean): void
+  + getId(): Serializable
+}
+interface Identifiable<I>{
+  org.vendorunlockingpatterns.apigatewayfederator.entity.Identifiable<I> 
+  + getId(): I
+}
+abstract SynchEntity {
+  org.vendorunlockingpatterns.apigatewayfederator.entity
+ 
+  + SynchEntity(): 
+  + getId(): String
+  + setId(String): void
+  + getStartedAt(): Date
+  + setStartedAt(Date): void
+  + getFinishedAt(): Date
+  + setFinishedAt(Date): void
+  + getSynchedApis(): List<SynchedApiEntity>
+  + setSynchedApis(List<SynchedApiEntity>): void
+  + getId(): Serializable
+}
+abstract SynchedApiEntity {
+  org.vendorunlockingpatterns.apigatewayfederator.entity
+ 
+  + SynchedApiEntity(): 
+  + setId(Long): void
+  + getSynch(): SynchEntity
+  + setSynch(SynchEntity): void
+  + getApi(): ApiEntity
+  + setApi(ApiEntity): void
+}
+
+@enduml

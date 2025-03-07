@@ -1,0 +1,9 @@
+@startuml
+interface FieldValidator<T> {
+  org.vendorunlockingpatterns.apigatewayfederator.validation.FieldValidator<T>
+ 
+  + validate(String, T): void
+  + validate(String, T, AgfExceptionBuilder): void
+}
+
+@enduml

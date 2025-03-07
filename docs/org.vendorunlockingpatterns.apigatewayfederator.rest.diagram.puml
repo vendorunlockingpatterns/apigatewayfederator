@@ -1,0 +1,20 @@
+@startuml
+interface AgfCrudRest<I>{
+  org.vendorunlockingpatterns.apigatewayfederator.rest.AgfCrudRest<I> 
+  + getController(): AgfCrudController<I, E>
+  + updateEntity(I, AgfUpdateDto<I>): void
+}
+enum HttpStatus {
+  org.vendorunlockingpatterns.apigatewayfederator.rest
+ 
+  + NOT_IMPLEMENTED: HttpStatus
+  ~ statusCode: int
+  ~ reason: String
+ 
+  + values(): HttpStatus[]
+  + valueOf(String): HttpStatus
+  + getStatusCode(): int
+  + getReasonPhrase(): String
+}
+
+@enduml

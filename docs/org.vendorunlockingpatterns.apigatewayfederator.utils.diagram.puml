@@ -1,0 +1,155 @@
+@startuml
+class AgfLogger {
+  org.vendorunlockingpatterns.apigatewayfederator.utils
+ 
+  - delegate: Logger
+ 
+  - toObjectArray(Supplier<Object>...): Object[]
+  + AgfLogger(Logger): 
+  - log(Supplier<String>, BooleanSupplier, Consumer<String>): void
+  - log(Supplier<String>, Throwable, BooleanSupplier, BiConsumer<String, Throwable>): void
+  + getName(): String
+  + isTraceEnabled(): boolean
+  + trace(String): void
+  + trace(Supplier<String>): void
+  + trace(String, Object): void
+  + trace(String, Object, Object): void
+  + trace(String, ..): void
+  + trace(String, Throwable): void
+  + trace(Supplier<String>, Throwable): void
+  + isTraceEnabled(Marker): boolean
+  + trace(Marker, String): void
+  + trace(Marker, String, Object): void
+  + trace(Marker, String, Object, Object): void
+  + trace(Marker, String, ..): void
+  + trace(Marker, String, Throwable): void
+  + isDebugEnabled(): boolean
+  + debug(String): void
+  + debug(Supplier<String>): void
+  + debug(String, Object): void
+  + debug(String, Supplier<Object>): void
+  + debug(String, Supplier<Object>...): void
+  + debug(String, Object, Object): void
+  + debug(String, ..): void
+  + debug(String, Throwable): void
+  + debug(Supplier<String>, Throwable): void
+  + isDebugEnabled(Marker): boolean
+  + debug(Marker, String): void
+  + debug(Marker, String, Object): void
+  + debug(Marker, String, Object, Object): void
+  + debug(Marker, String, ..): void
+  + debug(Marker, String, Throwable): void
+  + isInfoEnabled(): boolean
+  + info(String): void
+  + info(Supplier<String>): void
+  + info(String, Object): void
+  + info(String, Supplier<Object>): void
+  + info(String, Supplier<Object>...): void
+  + info(String, Object, Object): void
+  + info(String, ..): void
+  + info(String, Throwable): void
+  + info(Supplier<String>, Throwable): void
+  + isInfoEnabled(Marker): boolean
+  + info(Marker, String): void
+  + info(Marker, String, Object): void
+  + info(Marker, String, Object, Object): void
+  + info(Marker, String, ..): void
+  + info(Marker, String, Throwable): void
+  + isWarnEnabled(): boolean
+  + warn(String): void
+  + warn(Supplier<String>): void
+  + warn(String, Object): void
+  + warn(String, Supplier<Object>): void
+  + warn(String, ..): void
+  + warn(String, Supplier<Object>...): void
+  + warn(String, Object, Object): void
+  + warn(String, Throwable): void
+  + warn(Supplier<String>, Throwable): void
+  + isWarnEnabled(Marker): boolean
+  + warn(Marker, String): void
+  + warn(Marker, String, Object): void
+  + warn(Marker, String, Object, Object): void
+  + warn(Marker, String, ..): void
+  + warn(Marker, String, Throwable): void
+  + isErrorEnabled(): boolean
+  + error(String): void
+  + error(Supplier<String>): void
+  + error(String, Object): void
+  + error(String, Object, Object): void
+  + error(String, ..): void
+  + error(String, Throwable): void
+  + error(Supplier<String>, Throwable): void
+  + isErrorEnabled(Marker): boolean
+  + error(Marker, String): void
+  + error(Marker, String, Object): void
+  + error(Marker, String, Object, Object): void
+  + error(Marker, String, ..): void
+  + error(Marker, String, Throwable): void
+}
+class AgfLoggerFactory {
+  org.vendorunlockingpatterns.apigatewayfederator.utils
+ 
+  - AgfLoggerFactory(): 
+  + getLogger(Class<?>): AgfLogger
+  + getLogger(String): AgfLogger
+}
+class CastUtils {
+  org.vendorunlockingpatterns.apigatewayfederator.utils
+ 
+  - CastUtils(): 
+  + cast(F): <T, F> T
+}
+class CheckUtils {
+  org.vendorunlockingpatterns.apigatewayfederator.utils
+ 
+  - CheckUtils(): 
+  + isNullOrEmpty(Collection<?>): boolean
+  + isNullOrEmpty(Map<?, ?>): boolean
+  + isNullOrEmpty(String): boolean
+  + isNullOrBlank(String): boolean
+  + requireNotNullOrBlank(String): String
+  + requireNotNullOrBlank(String, String): String
+  + requireNotNullOrBlank(String, String, Function<String, ? extends RuntimeException>): String
+  + requireNotNullOrEmpty(Collection<T>): <T> Collection<T>
+  + requireNotNullOrEmpty(Collection<T>, String): <T> Collection<T>
+  + requireNotNullOrEmpty(Collection<T>, String, Function<String, ? extends RuntimeException>): <T> Collection<T>
+  + isEqualCollection(Collection<?>, Collection<?>): boolean
+  + getOrDefaultIfNull(T, T): <T> T
+  + sameSize(Collection<?>, Collection<?>): boolean
+  + allNull(..): boolean
+  + allNonNull(..): boolean
+  + allArgsHaveCondition(Predicate<Object>, boolean, ..): boolean
+}
+class MessageUtils {
+  org.vendorunlockingpatterns.apigatewayfederator.utils
+ 
+  - START_DELIMITER: String
+  - END_DELIMITER: String
+  - VALUE_SEPARATOR: String
+  - FIELD_SEPARATOR: String
+  - TWO_FIELDS_FORMAT: String
+  - THREE_FIELDS_FORMAT: String
+  - FOUR_FIELDS_FORMAT: String
+ 
+  - MessageUtils(): 
+  + formatSynch(SynchEntity): String
+  + formatGateway(GatewayEntity): String
+  + formatApi(Api): String
+  + formatApi(ApiEntity): String
+  + formatCredentialParams(List<String>, List<String>, Integer): String
+  + format(String, ..): String
+  + collectionToString(Collection<T>): <T> String
+  + collectionToString(Collection<T>, Function<T, String>): <T> String
+}
+class TypeUtils {
+  org.vendorunlockingpatterns.apigatewayfederator.utils
+ 
+  - TypeUtils(): 
+  + isTypeClassAssignableFrom(Class<?>): Predicate<Type>
+  + getActualTypeArgumentClass(Class<?>, Predicate<Type>): <T> Class<T>
+  + getActualTypeArguments(Class<?>): Type[]
+  + unproxifyClass(Class<?>, List<String>): Class<?>
+  + isProxyClass(Class<?>, List<String>): boolean
+}
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+interface PagedResult<T> {
+  org.vendorunlockingpatterns.apigatewayfederator.pagination.PagedResult<T>
+ 
+  + getLimit(): Integer
+  + getOffset(): Integer
+  + getNextPageId(): String
+  + getCount(): Long
+  + getContent(): List<T>
+  + isLastPage(): boolean
+  + mapContent(Function<T, R>): <R> PagedResult<R>
+}
+interface PaginationContext {
+  org.vendorunlockingpatterns.apigatewayfederator.pagination
+ 
+  + getOffset(): Integer
+  + getLimit(): Integer
+  + getNextPageId(): String
+  + init(MultivaluedMap<String, String>): void
+  + getActualLimit(long, int): int
+  + getActualLimit(int): int
+  + getActualOffset(): int
+}
+
+@enduml
