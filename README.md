@@ -56,6 +56,34 @@ You must change `version` tag in [POM file](impl/pom.xml) before to deploy.
 mvn clean install javadoc:jar source:jar deploy
 ```
 
+The `settings.xml` file of Maven, located in `~/.m2` directory, must have the following section:
+
+```xml
+  <servers>
+    <server>
+      <id>github</id>
+      <username>[USERNAME]</username>
+      <password>[PERSONAL ACCESS TOKEN]</password>
+    </server>
+    <server>
+      <id>gpg.passphrase</id>
+      <passphrase>[GPG PASSPHRASE]</passphrase>
+    </server>
+  </servers>
+```
+
+The **personal access token** must be created in your Github account at this path: `Settings` | `Developer Settings` | `Personal access token` | `Tokens (classic)`. The access token needs to be defined with the scopes `repo`, `write:packages` and `delete:packages`.
+
+The GPG key must be added to your Github profile at this path: `Settings` | `SSH and GPG keys` | `New GPG key`
+
+Reference for publishing of packages in Github:
+
+* https://docs.github.com/en/actions/use-cases-and-examples/publishing-packages/publishing-java-packages-with-maven
+
+TODO: publish packages to Sonatype
+
+Obstacle: domain ownership.
+
 Reference for Sonatype deployment:
 
 * https://central.sonatype.org/publish/requirements
